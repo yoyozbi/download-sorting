@@ -1,0 +1,13 @@
+{
+  "username": "yohan",
+  "folder_to_track": "c:/users/yohan/Downloads",
+  "executable": {
+    "folder_destination": "c:/users/yohan/Downloads/exe/",
+    "extension": [ "exe", "msi", "jar" ]
+  },
+  "archives": {
+    "folder_destination": "c:/users/yohan/Downloads/archives/",
+    "extension": [ "rar", "iso", "zip", "7z" ]
+  },
+  "other": "c:/users/yohan/Downloads/autres/"
+}
