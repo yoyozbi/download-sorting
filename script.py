@@ -57,11 +57,9 @@ class ForJson:
                 global properties
                 properties = json.load(f)
         else:
-            ForJson.createJson(self)
+            ForJson().createJson()
 
 class compress():
-    def __init__(self):
-        self.nothing = False
     def findOldestFile(self):
         files = compress.get_all_file_paths(self, properties["folder_to_track"])
         biggest = os.path.getctime(files[0])
@@ -81,11 +79,12 @@ class compress():
                 # join the two strings in order to form the full filepath.
                 filepath = os.path.join(root, filename)
                 file_paths.append(filepath)
-
         # returning all file paths
         return file_paths
+
+
     def compress(self):
-        files = compress.get_all_file_paths(self, properties["folder_to_track"])
+        files = compress().get_all_file_paths(properties["folder_to_track"])
         actual_date = datetime.date.today()
         past_month = 12 if actual_date.month == 1 else actual_date.month -1
         if past_month == compress().findOldestFile():
@@ -118,8 +117,7 @@ def findFile():
     renameFilesIfAsExtension(
         properties['folder_to_track'], properties["other"], True)
 
-useJson = ForJson()
-useJson.readJson()
+ForJson().readJson()
 f1 = glob.glob('*.*')
 try:
     while True:
