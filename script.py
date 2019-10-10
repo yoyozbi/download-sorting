@@ -37,8 +37,11 @@ class ForJson:
 class compress():
     def findOldestFile(self):
         files = compress.get_all_file_paths(self, properties["folder_to_track"])
-        biggest = 
-        for i in range(files):
+        biggest = files[0]
+        for i in range(1,len(files)-1):
+            if files[i] > biggest:
+                biggest = files[i]
+        return biggest
 
     def get_all_file_paths(self,directory):
             # initializing empty file paths list
