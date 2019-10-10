@@ -1,13 +1,1 @@
-{
-  "username": "yohan",
-  "folder_to_track": "c:/users/yohan/Downloads",
-  "executable": {
-    "folder_destination": "c:/users/yohan/Downloads/exe/",
-    "extension": [ "exe", "msi", "jar" ]
-  },
-  "archives": {
-    "folder_destination": "c:/users/yohan/Downloads/archives/",
-    "extension": [ "rar", "iso", "zip", "7z" ]
-  },
-  "other": "c:/users/yohan/Downloads/autres/"
-}
+{"username": "yohan", "folder_to_track": "/home/yohan/T\u00e9l\u00e9chargements", "executable": {"folder_destination": "/home/yohan/T\u00e9l\u00e9chargements/exe/", "extension": ["exe", "msi", "jar", "run"]}, "archives": {"folder_destination": "/home/yohan/T\u00e9l\u00e9chargements/archives/", "extension": ["rar", "iso", "zip", "7z", "tar", "tar.bz2"]}, "other": "/home/yohan/T\u00e9l\u00e9chargements/autres/"}

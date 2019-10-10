@@ -1,23 +1,47 @@
 import os
 import time
 import glob
-from myPythonModules import other
-import json 
+import json
+import platform
+import locale
+
+def findStringInArray(array, string, multiple = False):
+    if multiple:
+        r = []
+    else:
+        r = -1
+    for i in range(len(array)):
+        if(array[i].find(string) != -1):
+            if multiple:
+                r.append(i)
+            else:
+                r = i
+    return r
+
+
+
 
 properties = {}
 class ForJson:
     def createJson(self):
-        username = input("enter you windows username: ")
-        properties ['username'] = username        
-        properties["folder_to_track"] = "c:/users/" + properties["username"] + "/Downloads"
-
+        local_language = locale.getdefaultlocale()[0]
+        print(local_language)
+        username = input("enter your {} username: ".format(platform.system()))
+        properties ['username'] = username
+        if platform.system() == "Windows":
+            properties["folder_to_track"] = "c:/users/" + properties["username"] + "/Downloads"
+        elif platform.system() == "Linux":
+            if local_language.find('en') != -1:
+                properties["folder_to_track"] = "/home/" + properties["username"] + "/Downloads"
+            elif local_language.find('fr') != -1:
+                properties["folder_to_track"] = "/home/"+ properties["username"]+"/Téléchargements"
         properties['executable'] = {}
         properties["executable"]["folder_destination"] = properties["folder_to_track"] + "/exe/"
-        properties["executable"]["extension"] = ['exe', 'msi', 'jar']
+        properties["executable"]["extension"] = ['exe', 'msi', 'jar', "run"]
 
         properties["archives"] = {}
         properties["archives"]["folder_destination"] = properties["folder_to_track"] + "/archives/"
-        properties["archives"]["extension"] = ['rar', 'iso', 'zip', '7z']
+        properties["archives"]["extension"] = ['rar', 'iso', 'zip', '7z', "tar" , "tar.bz2"]
 
         properties["other"] = properties["folder_to_track"] + "/autres/"
         with open('./config.json','w') as f:
@@ -26,7 +50,7 @@ class ForJson:
 
     def readJson(self):
         if(os.path.isfile("./config.json")):
-            with open('./config.json', 'r') as f:
+            with open('./config.json', 'r') as f: 
                 global properties
                 properties = json.load(f)
         else:
@@ -37,7 +61,7 @@ def renameFilesIfAsExtension(folder_source, folder_destination, extension):
     os.chdir(folder_source)
     allFiles = glob.glob('*.*')
     if(extension != True):
-        find = other.findStringArray(allFiles, extension, True)
+        find = findStringInArray(allFiles, extension, True)
         if(len(find) > 0):
             for i in range(len(find)):
                 os.rename(allFiles[find[i]], folder_destination + allFiles[find[i]])
@@ -49,7 +73,6 @@ def renameFilesIfAsExtension(folder_source, folder_destination, extension):
 def findFile():
     for i in properties:
         if i != "username" and i != "folder_to_track" and i != "other":
-            print(i)
             for extension in properties.get(i)["extension"]:
                 renameFilesIfAsExtension(properties['folder_to_track'], properties[i]["folder_destination"], extension)    
     renameFilesIfAsExtension(
