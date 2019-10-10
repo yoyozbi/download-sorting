@@ -1,15 +1,11 @@
 import os
 import time
 import glob
-<<<<<<< HEAD
-from myPythonModules import other
-from zipfile import ZipFile
-import json 
-import datetime
-=======
 import json
 import platform
 import locale
+import datetime
+from zipfile import ZipFile
 
 def findStringInArray(array, string, multiple = False):
     if multiple:
@@ -27,7 +23,6 @@ def findStringInArray(array, string, multiple = False):
 
 
 
->>>>>>> master
 properties = {}
 class ForJson:
     def createJson(self):
@@ -65,13 +60,16 @@ class ForJson:
             ForJson.createJson(self)
 
 class compress():
+    def __init__(self):
+        self.nothing = False
     def findOldestFile(self):
         files = compress.get_all_file_paths(self, properties["folder_to_track"])
-        biggest = files[0]
-        for i in range(1,len(files)-1):
-            if files[i] > biggest:
-                biggest = files[i]
-        return biggest
+        biggest = os.path.getctime(files[0])
+        for i in range(1,len(files)):
+            if os.path.getctime(files[i]) > biggest:
+                biggest = os.path.getctime(files[i])
+        month = time.strftime('%m', time.gmtime(biggest))
+        return month
 
     def get_all_file_paths(self,directory):
             # initializing empty file paths list
@@ -86,12 +84,19 @@ class compress():
 
         # returning all file paths
         return file_paths
-    def compress(self, date):
+    def compress(self):
         files = compress.get_all_file_paths(self, properties["folder_to_track"])
         actual_date = datetime.date.today()
-        with ZipFile(properties['old'] + actual_date.month + actual_date.year + ".zip") as zip:
-            for file in files:
-                zip.write(file)
+        past_month = 12 if actual_date.month == 1 else actual_date.month -1
+        if past_month == compress().findOldestFile():
+            print(actual_date.month)
+            with ZipFile(properties['old'] + actual_date.month + "-" +actual_date.year + ".zip", "a") as zip:
+                for file in files:
+                    zip.write(file)
+
+
+
+
 def renameFilesIfAsExtension(folder_source, folder_destination, extension):
     os.chdir(folder_source)
     allFiles = glob.glob('*.*')
@@ -107,12 +112,7 @@ def renameFilesIfAsExtension(folder_source, folder_destination, extension):
 
 def findFile():
     for i in properties:
-<<<<<<< HEAD
         if i != "username" and i != "folder_to_track" and i != "other" and i!= "old":
-            print(i)
-=======
-        if i != "username" and i != "folder_to_track" and i != "other":
->>>>>>> master
             for extension in properties.get(i)["extension"]:
                 renameFilesIfAsExtension(properties['folder_to_track'], properties[i]["folder_destination"], extension)    
     renameFilesIfAsExtension(
@@ -121,10 +121,10 @@ def findFile():
 useJson = ForJson()
 useJson.readJson()
 f1 = glob.glob('*.*')
-
 try:
     while True:
         time.sleep(1)
+        compress().compress()
         findFile()
 except KeyboardInterrupt:
     print('exit')

@@ -1,0 +1,30 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ForJson	../script.py	/^class ForJson:$/;"	kind:class	line:28
+ZipFile	../script.py	/^from zipfile import ZipFile$/;"	kind:namespace	line:8
+__init__	../script.py	/^    def __init__(self):$/;"	kind:member	line:64
+compress	../script.py	/^    def compress(self):$/;"	kind:member	line:88
+compress	../script.py	/^class compress():$/;"	kind:class	line:63
+createJson	../script.py	/^    def createJson(self):$/;"	kind:member	line:29
+datetime	../script.py	/^from datetime import datetime$/;"	kind:namespace	line:9
+datetime	../script.py	/^import datetime$/;"	kind:namespace	line:7
+f1	../script.py	/^f1 = glob.glob('*.*')$/;"	kind:variable	line:121
+findFile	../script.py	/^def findFile():$/;"	kind:function	line:111
+findOldestFile	../script.py	/^    def findOldestFile(self):$/;"	kind:member	line:66
+findStringInArray	../script.py	/^def findStringInArray(array, string, multiple = False):$/;"	kind:function	line:11
+get_all_file_paths	../script.py	/^    def get_all_file_paths(self,directory):$/;"	kind:member	line:75
+glob	../script.py	/^import glob$/;"	kind:namespace	line:3
+json	../script.py	/^import json$/;"	kind:namespace	line:4
+locale	../script.py	/^import locale$/;"	kind:namespace	line:6
+os	../script.py	/^import os$/;"	kind:namespace	line:1
+platform	../script.py	/^import platform$/;"	kind:namespace	line:5
+properties	../script.py	/^properties = {}$/;"	kind:variable	line:27
+readJson	../script.py	/^    def readJson(self):$/;"	kind:member	line:55
+renameFilesIfAsExtension	../script.py	/^def renameFilesIfAsExtension(folder_source, folder_destination, extension):$/;"	kind:function	line:98
+script.py	../script.py	1;"	kind:file	line:1
+time	../script.py	/^import time$/;"	kind:namespace	line:2
+useJson	../script.py	/^useJson = ForJson()$/;"	kind:variable	line:119
